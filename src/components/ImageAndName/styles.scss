@@ -1,0 +1,25 @@
+.image-text {
+  align-self: baseline;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  font-family: 'Montserrat Regular';
+  font-size: 1.4em;
+  align-items: center;
+  flex: 50%;
+  margin-left: 5px;
+  margin-right: 5px;
+  width: 100%;
+  text-align: center;
+  padding: 15px;
+}
+
+img {
+  margin-bottom: 10px;
+}
+
+@media (max-width: 985px) {
+  .image-text {
+    margin-bottom: 30px;
+  }
+}

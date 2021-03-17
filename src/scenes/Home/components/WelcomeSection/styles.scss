@@ -1,0 +1,45 @@
+@import '../../../../scss-variables.scss';
+
+.welcome-section {
+  background-image: url(../../../../assets/backgrounds/Bg_Footer@3x.png);
+  background-size: cover;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.welcome-text {
+  font-family: 'Montserrat Regular';
+  font-size: 2.5em;
+  display: flex;
+  flex-direction: column;
+  .bold {
+    font-family: 'Montserrat SemiBold';
+  }
+  .main {
+    font-family: 'Montserrat Bold';
+    color: $mainGreen;
+  }
+}
+
+.welcome-image {
+  z-index: 1;
+  width: 416px;
+  transform: rotateY(180deg);
+}
+
+@media (max-width: 890px) {
+  .welcome-text {
+    font-size: 1.8em;
+  }
+  .welcome-section {
+    flex-direction: column;
+    padding: 2px;
+  }
+
+  .welcome-image {
+    width: 300px;
+  }
+}

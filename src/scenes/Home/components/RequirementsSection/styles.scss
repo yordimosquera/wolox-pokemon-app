@@ -1,0 +1,31 @@
+@import '../../../../scss-variables.scss';
+
+.requirements-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  padding: 30px;
+}
+
+.requirement-element {
+  align-self: center;
+  text-align: center;
+  flex: 1;
+  font-family: 'Montserrat Bold';
+  font-size: 1.7em;
+}
+
+.requirements-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+@media (max-width: 1200px) {
+  .requirements-section {
+    display: flex;
+    flex-direction: column;
+  }
+}

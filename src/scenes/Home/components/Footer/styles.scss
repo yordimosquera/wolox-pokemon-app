@@ -1,0 +1,39 @@
+@import '../../../../scss-variables.scss';
+
+.footer {
+  align-items: center;
+  background-image: url(../../../../assets/backgrounds/Bg_Footer@3x.png);
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 50px;
+  padding-top: 50px;
+}
+
+.footer-text {
+  font-family: 'Montserrat Regular';
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-size: 2em;
+  .bold {
+    font-family: 'Montserrat Bold';
+  }
+  .bold-blue {
+    font-family: 'Montserrat Bold';
+    color: $mainBlue;
+  }
+  .regular {
+    font-size: 0.8em;
+  }
+}
+
+.logo {
+  margin-top: 60px;
+}
+
+@media (max-width: 1200px) {
+  .footer {
+    padding: 30px;
+  }
+}
