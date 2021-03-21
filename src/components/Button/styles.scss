@@ -24,6 +24,12 @@
   border-color: $mainBlue;
 }
 
+.btn--disabled {
+  background-color: $lightBlue;
+  color: $mainWhite;
+  border-color: $lightBlue;
+}
+
 .btn--outline--secondary {
   background-color: transparent;
   color: $mainWhite;
