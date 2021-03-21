@@ -54,7 +54,7 @@ const Navbar = () => {
             <BiMenu className="nav-menu-icon" onClick={() => handleClick()} />
           )
         ) : (
-          <Link className="login-button" to={'/login'}>
+          <Link to={'/sign-up'}>
             <Button buttonStyle="btn--outline">{'Registro'}</Button>
           </Link>
         )}
