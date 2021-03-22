@@ -1,0 +1,11 @@
+@import '../../scss-variables.scss';
+
+.custom-select {
+  font-family: 'Montserrat Regular';
+  width: 10rem;
+  border: none;
+  font-size: 1rem;
+  padding: 1rem;
+  line-height: 147.6%;
+  border-bottom: 0.125rem solid $lightBlue;
+}

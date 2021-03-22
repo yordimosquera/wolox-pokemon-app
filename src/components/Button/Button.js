@@ -8,7 +8,13 @@ const STYLES = [
   'btn--disabled'
 ];
 
-const Button = ({ children, onClick, buttonStyle, type = '', disabled }) => {
+const Button = ({
+  children,
+  onClick,
+  buttonStyle,
+  type = '',
+  disabled = false
+}) => {
   const checkButtonStyle = STYLES.includes(buttonStyle)
     ? buttonStyle
     : STYLES[0];

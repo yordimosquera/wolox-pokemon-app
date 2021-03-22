@@ -22,7 +22,7 @@ const SignUp = () => {
   const { getCountries, countries } = countriesContext;
 
   useEffect(() => {
-    getCountries('col');
+    getCountries();
   }, []);
 
   const buttonDisabled = Object.keys(errors).length > 0;
