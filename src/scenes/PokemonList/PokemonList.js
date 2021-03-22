@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { BiSearchAlt2 } from 'react-icons/bi';
+import { Pagination } from 'react-custom-pagination';
 
 import ElementList from '../../components/ElementList/ElementList';
 import Button from '../../components/Button';
@@ -8,11 +9,20 @@ import InputText from '../../components/InputText';
 import ErrorText from '../../components/ErrorText';
 import Modal from '../../components/Modal';
 import PokemonDetailCard from './PokemonDetailCard';
+import CustomSelect from '../../components/CustomSelect';
 import PokemonContext from '../../store/Pokemon/context';
+import { ELEMENTS_PER_PAGE_OPTIONS } from '../../constants';
 
 const PokemonList = () => {
   const pokemonContext = useContext(PokemonContext);
   const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const [paginationData, setPaginationData] = useState({
+    currentPage: 1,
+    elementsPerPage: 20,
+    offset: 0,
+    limit: 20
+  });
   const [pokemonChosed, setPokemonChosed] = useState([]);
   const { handleSubmit, control } = useForm();
   const {
@@ -24,7 +34,7 @@ const PokemonList = () => {
     getPokemonDetails,
     pokemonChosedDetails
   } = pokemonContext;
-  const { results: pokemonList = [] } = pokemon;
+  const { results: pokemonList = [], count = 0 } = pokemon;
 
   const onSubmit = ({ nameOrId }) => {
     getPokemonByIdOrName(nameOrId);
@@ -50,6 +60,34 @@ const PokemonList = () => {
   const getPokemonChosedDetails = () => {
     getPokemonDetails(pokemonChosed);
     setIsModalVisible(true);
+  };
+
+  const restoreSearch = () => {
+    getPokemon({ limit: 20, offset: 0 });
+    setPaginationData({
+      currentPage: 1,
+      elementsPerPage: 20,
+      offset: 0,
+      limit: 20
+    });
+  };
+
+  const paginate = pageNumber => {
+    const { elementsPerPage } = paginationData;
+    const newLimit = pageNumber * elementsPerPage;
+    const newOffset = newLimit - elementsPerPage;
+    getPokemon({ limit: elementsPerPage, offset: newOffset });
+    setPaginationData({
+      currentPage: pageNumber,
+      limit: elementsPerPage,
+      offset: newOffset,
+      elementsPerPage
+    });
+  };
+
+  const getElementsPerPage = value => {
+    setPaginationData({ ...paginationData, elementsPerPage: value });
+    getPokemon({ limit: value, offset: 0 });
   };
 
   return (
@@ -89,7 +127,7 @@ const PokemonList = () => {
       <Button
         buttonStyle={'btn--primary'}
         type="submit"
-        onClick={() => getPokemon({ limit: 20, offset: 0 })}
+        onClick={() => restoreSearch()}
       >
         {'Restablecer'}
       </Button>
@@ -110,6 +148,12 @@ const PokemonList = () => {
       >
         {'Comparar'}
       </Button>
+      <CustomSelect
+        options={ELEMENTS_PER_PAGE_OPTIONS}
+        handleChange={e => {
+          getElementsPerPage(e.target.value);
+        }}
+      />
       {Array.isArray(pokemonList) && pokemonList.length > 0 ? (
         pokemonList.map((item, index) => (
           <ElementList
@@ -123,6 +167,16 @@ const PokemonList = () => {
       ) : (
         <p>{'No se encontró ningún pokemon'}</p>
       )}
+      <div style={{ width: '500px' }}>
+        <Pagination
+          totalPosts={count}
+          postsPerPage={paginationData.elementsPerPage}
+          paginate={paginate}
+          showLast={true}
+          showFirst={true}
+          showIndex={true}
+        />
+      </div>
     </>
   );
 };
