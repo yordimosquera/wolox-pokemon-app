@@ -12,13 +12,13 @@ export default (state, action) => {
       countries: action.payload
     },
     [FETCHING_COUNTRIES]: {
-      status: 'loading',
-      ...state
+      ...state,
+      status: 'loading'
     },
     [FETCH_COUNTRIES_FAILED]: {
+      ...state,
       status: 'not loaded',
-      error: action.error,
-      ...state
+      error: action.error
     }
   };
   return reducer[action.type] ? reducer[action.type] : state;

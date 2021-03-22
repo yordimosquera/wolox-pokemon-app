@@ -1,0 +1,15 @@
+@import '../../scss-variables.scss';
+
+.modal {
+  position: fixed;
+  z-index: 500;
+  background-color: $mainWhite;
+  width: 70%;
+  border: 1px solid $secondaryWhite;
+  box-shadow: 1px 1px 1px black;
+  left: 15%;
+  box-sizing: border-box;
+  transition: all 0.3s ease-out;
+  max-height: 500px;
+  overflow-y: auto;
+}

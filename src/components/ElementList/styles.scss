@@ -1,0 +1,33 @@
+@import '../../scss-variables.scss';
+
+.element {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  justify-content: space-between;
+  width: 10%;
+  font-size: 0.9em;
+  font-family: 'Montserrat Medium';
+  background-color: $mainBlue;
+  color: $mainWhite;
+  margin: 10px;
+  padding-left: 10px;
+}
+
+.element-button {
+  text-align: center;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  background-color: $mainBlue;
+  color: $mainWhite;
+  border-color: $mainBlue;
+  width: 40px;
+}
+
+.element-button:hover {
+  transition: all 0.3s ease-out;
+  background-color: $lightBlue;
+  color: $mainBlue;
+  transition: 250ms;
+}
