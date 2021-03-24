@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useRef } from 'react';
 import { useForm, Controller } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 import { BiUser } from 'react-icons/bi';
 import { GiPadlock } from 'react-icons/gi';
 import { AiOutlineMail } from 'react-icons/ai';
@@ -178,7 +179,10 @@ const SignUp = ({ history }) => {
             checked={props.value}
             onChange={e => props.onChange(e.target.checked)}
           >
-            {'Aceptas los terminos y condiciones'}
+            <p>{'Aceptas los terminos y condiciones'}</p>
+            <Link to={'terms'} target="_blank">
+              {'Terms and conditions'}
+            </Link>
           </CheckBox>
         )}
       />

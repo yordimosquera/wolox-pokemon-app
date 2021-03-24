@@ -6,6 +6,7 @@ import CountriesWrapper from './store/Countries';
 import PokemonWrapper from './store/Pokemon';
 import SignUpWrapper from './store/SignUp/SignUpWrapper';
 import PrivateRoute from './components/PrivateRoute';
+import TermsAndConditions from './scenes/TermsAndConditions/';
 import './App.scss';
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
                   component={SignUp}
                   condition={token ? false : true}
                 />
+                <Route exact path="/terms" component={TermsAndConditions} />
               </Switch>
             </Router>
           </SignUpWrapper>
@@ -37,7 +39,3 @@ function App() {
 }
 
 export default App;
-
-// <Button className="btns" buttonStyle="btn--primary">
-// GET STARTED
-// </Button>
