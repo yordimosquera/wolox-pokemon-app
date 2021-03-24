@@ -4,20 +4,32 @@ import PokemonList from './scenes/PokemonList';
 import SignUp from './scenes/SignUp';
 import CountriesWrapper from './store/Countries';
 import PokemonWrapper from './store/Pokemon';
+import SignUpWrapper from './store/SignUp/SignUpWrapper';
+import PrivateRoute from './components/PrivateRoute';
 import './App.scss';
 
 function App() {
+  const token = localStorage.getItem('token');
+
   return (
     <>
       <CountriesWrapper>
         <PokemonWrapper>
-          <Router>
-            <Switch>
-              <Route path="/" exact component={Home} />
-              <Route path="/pokemonlist" component={PokemonList} />
-              <Route path="/sign-up" component={SignUp} />
-            </Switch>
-          </Router>
+          <SignUpWrapper>
+            <Router>
+              <Switch>
+                <Route path="/" exact component={Home} />
+                <Route path="/pokemonlist" component={PokemonList} />
+                <PrivateRoute
+                  exact
+                  path="/sign-up"
+                  secondaryPath={'/pokemonlist'}
+                  component={SignUp}
+                  condition={token ? false : true}
+                />
+              </Switch>
+            </Router>
+          </SignUpWrapper>
         </PokemonWrapper>
       </CountriesWrapper>
     </>

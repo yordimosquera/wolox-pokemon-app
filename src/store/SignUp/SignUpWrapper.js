@@ -7,10 +7,11 @@ const SignUpWrapper = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, { token: null });
   const { status = 'not loaded', token = null, error } = state;
 
-  const userSignUp = userData => signUp({ dispatch, userData });
+  const userSignUp = (userData, countries) =>
+    signUp({ dispatch, userData, countries });
 
   return (
-    <context.Provider value={(status, error, token, userSignUp)}>
+    <context.Provider value={{ status, error, token, userSignUp }}>
       {children}
     </context.Provider>
   );

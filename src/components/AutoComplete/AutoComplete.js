@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import ItemList from '../ItemList';
 import './styles.scss';
 
-const AutoComplete = ({ options, ...rest }) => {
+const AutoComplete = ({ options, onChange, ...rest }) => {
   const [autoCompleteOptions, setAutoCompleteOptions] = useState({
     activeOption: 0,
     filteredOptions: [],
@@ -20,7 +20,7 @@ const AutoComplete = ({ options, ...rest }) => {
       />
     ));
 
-  const onChange = e => {
+  const onChangeInput = e => {
     const userInput = e.currentTarget.value;
 
     const filteredOptions = options.filter(
@@ -42,6 +42,7 @@ const AutoComplete = ({ options, ...rest }) => {
       showOptions: false,
       userInput: e.currentTarget.innerText
     });
+    onChange(e.currentTarget.innerText);
   };
 
   const onKeyDown = e => {
@@ -117,7 +118,7 @@ const AutoComplete = ({ options, ...rest }) => {
           type="text"
           className="search-box"
           {...rest}
-          onChange={onChange}
+          onChange={onChangeInput}
           onKeyDown={onKeyDown}
           value={userInput}
         />

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { BiUser } from 'react-icons/bi';
 import { GiPadlock } from 'react-icons/gi';
@@ -11,14 +11,16 @@ import Button from '../../components/Button';
 import AutoComplete from '../../components/AutoComplete';
 import CheckBox from '../../components/CheckBox';
 import CountriesContext from '../../store/Countries/context';
+import SignUpContext from '../../store/SignUp/context';
+import { SIGN_UP_FIELDS_ERRORS } from '../../constants';
 import './styles.scss';
 
-const SignUp = () => {
+const SignUp = ({ history }) => {
   const countriesContext = useContext(CountriesContext);
-  const { handleSubmit, errors, control } = useForm();
+  const signUpContext = useContext(SignUpContext);
+  const { handleSubmit, errors, control, watch } = useForm();
 
-  const onSubmit = data => console.log(data);
-
+  const { userSignUp } = signUpContext;
   const { getCountries, countries } = countriesContext;
 
   useEffect(() => {
@@ -26,92 +28,151 @@ const SignUp = () => {
   }, []);
 
   const buttonDisabled = Object.keys(errors).length > 0;
+  const onSubmit = data => {
+    userSignUp(data, countries);
+    history.push('/pokemonlist');
+  };
+
+  console.log(errors);
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Controller
-        name={'firstName'}
+        name={'name'}
         control={control}
         defaultValue={''}
-        rules={{ required: true, maxLength: 30 }}
-        errorMessage={errors?.value?.message}
+        rules={{
+          required: SIGN_UP_FIELDS_ERRORS.name.required,
+          maxLength: {
+            value: 30,
+            message: SIGN_UP_FIELDS_ERRORS.name.maxLength
+          }
+        }}
         render={props => (
           <InputText placeHolder={'first name'} {...props}>
             <BiUser />
           </InputText>
         )}
       />
-      {errors.firstName && <ErrorText message={'First name is required'} />}
+      {errors.name && <ErrorText message={errors.name.message} />}
 
       <Controller
-        name={'lastName'}
+        name={'last_name'}
         control={control}
         defaultValue={''}
-        rules={{ required: true, maxLength: 30 }}
-        errorMessage={errors?.value?.message}
+        rules={{
+          required: SIGN_UP_FIELDS_ERRORS.last_name.required,
+          maxLength: {
+            value: 30,
+            message: SIGN_UP_FIELDS_ERRORS.last_name.maxLength
+          }
+        }}
         render={props => (
           <InputText placeHolder={'last name'} {...props}>
             <BiUser />
           </InputText>
         )}
       />
-      {errors.lastName && <ErrorText message={'Last name is required'} />}
+      {errors.last_name && <ErrorText message={errors.last_name.message} />}
 
       <Controller
-        name={'email'}
+        name={'mail'}
         control={control}
         defaultValue={''}
-        rules={{ required: true, pattern: /\S+@\S+\.\S+/ }}
-        errorMessage={errors?.value?.message}
+        rules={{
+          required: SIGN_UP_FIELDS_ERRORS.mail.required,
+          pattern: {
+            value: /\S+@\S+\.\S+/,
+            message: SIGN_UP_FIELDS_ERRORS.mail.pattern
+          }
+        }}
         render={props => (
           <InputText name={'email'} placeHolder={'email'} {...props}>
             <AiOutlineMail />
           </InputText>
         )}
       />
-      {errors.email && <ErrorText message={'Email is required'} />}
+      {errors.mail && <ErrorText message={errors.mail.message} />}
 
       <Controller
         name={'phone'}
         control={control}
         defaultValue={''}
-        rules={{ required: true, minLength: 10, maxLength: 10 }}
-        errorMessage={errors?.value?.message}
+        rules={{
+          required: SIGN_UP_FIELDS_ERRORS.phone.required,
+          minLength: {
+            value: 10,
+            message: SIGN_UP_FIELDS_ERRORS.phone.minLength
+          },
+          maxLength: {
+            value: 10,
+            message: SIGN_UP_FIELDS_ERRORS.phone.maxLength
+          }
+        }}
         render={props => (
           <InputText placeHolder={'phone'} type="number" {...props}>
             <AiTwotonePhone />
           </InputText>
         )}
       />
-      {errors.phone && <ErrorText message={'Phone is required'} />}
+
+      {errors.phone && <ErrorText message={errors.phone.message} />}
 
       <Controller
         name={'password'}
         control={control}
         defaultValue={''}
-        rules={{ required: true, minLength: 6 }}
-        errorMessage={errors?.value?.message}
+        rules={{
+          required: SIGN_UP_FIELDS_ERRORS.password.required,
+          minLength: {
+            value: 6,
+            message: SIGN_UP_FIELDS_ERRORS.password.minLength
+          }
+        }}
         render={props => (
           <InputText placeHolder={'password'} type={'password'} {...props}>
             <GiPadlock />
           </InputText>
         )}
       />
-      {errors.password && <ErrorText message={'Password is required'} />}
+      {errors.password && <ErrorText message={errors.password.message} />}
+
+      <Controller
+        name={'password_repeat'}
+        control={control}
+        defaultValue={''}
+        rules={{
+          required: SIGN_UP_FIELDS_ERRORS.password_repeat.required,
+          validate: value =>
+            value === watch('password') ||
+            SIGN_UP_FIELDS_ERRORS.password_repeat.validate
+        }}
+        render={props => (
+          <InputText
+            placeHolder={'repeat the password'}
+            type={'password'}
+            {...props}
+          >
+            <GiPadlock />
+          </InputText>
+        )}
+      />
+      {errors.password_repeat && (
+        <ErrorText message={errors.password_repeat.message} />
+      )}
 
       <Controller
         name="country"
         control={control}
         options={countries}
-        rules={{ required: true }}
+        rules={{ required: SIGN_UP_FIELDS_ERRORS.country.required }}
         as={AutoComplete}
       />
-      {errors.country && <ErrorText message={'Country is required'} />}
+      {errors.country && <ErrorText message={errors.country.message} />}
 
       <Controller
         name={'accept'}
         control={control}
-        rules={{ required: true }}
-        errorMessage={errors?.value?.message}
+        rules={{ required: SIGN_UP_FIELDS_ERRORS.accept.required }}
         render={props => (
           <CheckBox
             checked={props.value}
@@ -121,9 +182,7 @@ const SignUp = () => {
           </CheckBox>
         )}
       />
-      {errors.accept && (
-        <ErrorText message={'You should accept the terms and conditions'} />
-      )}
+      {errors.accept && <ErrorText message={errors.accept.message} />}
 
       <Button
         buttonStyle={buttonDisabled ? 'btn--disabled' : 'btn--primary'}
