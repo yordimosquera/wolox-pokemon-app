@@ -1,0 +1,40 @@
+@import '../../../../scss-variables.scss';
+
+.tech-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 30px;
+  padding-bottom: 40px;
+  width: 100%;
+}
+
+.tech-text {
+  font-family: 'Montserrat Regular';
+  font-size: 2.2em;
+  display: flex;
+  flex-direction: column;
+}
+
+.tech-image {
+  width: 35em;
+}
+
+@media (max-width: 890px) {
+  .tech-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .tech-text {
+    font-size: 1.8em;
+  }
+
+  .tech-image {
+    width: 20em;
+    margin-top: 25px;
+  }
+}

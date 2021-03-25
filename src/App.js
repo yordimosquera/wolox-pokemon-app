@@ -20,7 +20,6 @@ function App() {
             <Router>
               <Switch>
                 <Route path="/" exact component={Home} />
-                <Route path="/pokemonlist" component={PokemonList} />
                 <PrivateRoute
                   exact
                   path="/sign-up"
@@ -28,7 +27,22 @@ function App() {
                   component={SignUp}
                   condition={token ? false : true}
                 />
+                <PrivateRoute
+                  exact
+                  path="/pokemonlist"
+                  secondaryPath={'/sign-up'}
+                  component={PokemonList}
+                  condition={token ? true : false}
+                />
                 <Route exact path="/terms" component={TermsAndConditions} />
+                <Route
+                  path="/twitter"
+                  render={() => (window.location = 'https://twitter.com/Wolox')}
+                />
+                <Route
+                  path="/wolox"
+                  render={() => (window.location = 'https://www.wolox.com.ar/')}
+                />
               </Switch>
             </Router>
           </SignUpWrapper>

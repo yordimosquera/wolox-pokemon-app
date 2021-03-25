@@ -13,9 +13,8 @@ import Button from '../../components/Button';
 import AutoComplete from '../../components/AutoComplete';
 import CheckBox from '../../components/CheckBox';
 import MainLogo from '../../components/MainLogo';
-import { SIGN_UP_FIELDS_ERRORS } from '../../constants';
 import woloxLogo from '../../assets/images/logo_full_color.svg';
-
+import { SIGN_UP_FIELDS_ERRORS } from '../../constants';
 import './styles.scss';
 
 const SignUp = ({ history, getCountries, countries, userSignUp }) => {
@@ -31,11 +30,10 @@ const SignUp = ({ history, getCountries, countries, userSignUp }) => {
     history.push('/pokemonlist');
   };
 
-  console.log(errors);
   return (
     <div className="signup">
       <MainLogo route={'/'} logo={woloxLogo} />
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form className="signup-form" onSubmit={handleSubmit(onSubmit)}>
         <Controller
           name={'name'}
           control={control}
@@ -182,7 +180,7 @@ const SignUp = ({ history, getCountries, countries, userSignUp }) => {
               onChange={e => props.onChange(e.target.checked)}
             >
               <p>{'Aceptas los terminos y condiciones'}</p>
-              <Link to={'/terms'} target="_blank">
+              <Link to={'terms'} target="_blank">
                 {'Terms and conditions'}
               </Link>
             </CheckBox>
