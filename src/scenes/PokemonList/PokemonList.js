@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { BiSearchAlt2 } from 'react-icons/bi';
 import { Pagination } from 'react-custom-pagination';
@@ -10,11 +10,11 @@ import ErrorText from '../../components/ErrorText';
 import Modal from '../../components/Modal';
 import PokemonDetailCard from './PokemonDetailCard';
 import CustomSelect from '../../components/CustomSelect';
-import PokemonContext from '../../store/Pokemon/context';
-import { ELEMENTS_PER_PAGE_OPTIONS } from '../../constants';
 
-const PokemonList = () => {
-  const pokemonContext = useContext(PokemonContext);
+import { ELEMENTS_PER_PAGE_OPTIONS } from '../../constants';
+import './styles.scss';
+
+const PokemonList = ({ pokemonContext }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const [paginationData, setPaginationData] = useState({
@@ -91,7 +91,7 @@ const PokemonList = () => {
   };
 
   return (
-    <>
+    <div className="pokemonlist">
       {isModalVisible && (
         <Modal>
           <div>
@@ -177,7 +177,7 @@ const PokemonList = () => {
           showIndex={true}
         />
       </div>
-    </>
+    </div>
   );
 };
 

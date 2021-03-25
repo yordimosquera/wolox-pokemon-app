@@ -1,24 +1,17 @@
 import React, { useState, useMemo } from 'react';
+import InputText from '../InputText';
 import ItemList from '../ItemList';
 import './styles.scss';
 
-const AutoComplete = ({ options, onChange, ...rest }) => {
+const AutoComplete = ({ options, onChange, placeHolder, ...rest }) => {
   const [autoCompleteOptions, setAutoCompleteOptions] = useState({
-    activeOption: 0,
     filteredOptions: [],
     showOptions: false,
     userInput: ''
   });
 
-  const ItemsMemorized = ({ className, key, onClick, option }) =>
-    useMemo(() => (
-      <ItemList
-        option={option}
-        onClick={onClick}
-        className={className}
-        key={key}
-      />
-    ));
+  const ItemsMemorized = ({ key, onClick, option }) =>
+    useMemo(() => <ItemList option={option} onClick={onClick} key={key} />);
 
   const onChangeInput = e => {
     const userInput = e.currentTarget.value;
@@ -28,7 +21,6 @@ const AutoComplete = ({ options, onChange, ...rest }) => {
     );
 
     setAutoCompleteOptions({
-      activeOption: 0,
       filteredOptions,
       showOptions: true,
       userInput: e.currentTarget.value
@@ -37,7 +29,6 @@ const AutoComplete = ({ options, onChange, ...rest }) => {
 
   const onClick = e => {
     setAutoCompleteOptions({
-      activeOption: 0,
       filteredOptions: [],
       showOptions: false,
       userInput: e.currentTarget.innerText
@@ -45,60 +36,15 @@ const AutoComplete = ({ options, onChange, ...rest }) => {
     onChange(e.currentTarget.innerText);
   };
 
-  const onKeyDown = e => {
-    const { activeOption, filteredOptions } = autoCompleteOptions;
-
-    // keyCode for enter
-    if (e.keyCode === 13) {
-      setAutoCompleteOptions({
-        ...autoCompleteOptions,
-        activeOption: 0,
-        showOptions: false,
-        userInput: filteredOptions[activeOption]
-      });
-      // keyCode for space
-    } else if (e.keyCode === 38) {
-      if (activeOption === 0) {
-        return;
-      }
-      setAutoCompleteOptions({
-        ...autoCompleteOptions,
-        activeOption: activeOption - 1
-      });
-    } else if (e.keyCode === 40) {
-      if (activeOption === filteredOptions.length - 1) {
-        return;
-      }
-      setAutoCompleteOptions({
-        ...autoCompleteOptions,
-        activeOption: activeOption + 1
-      });
-    }
-  };
-
-  const {
-    activeOption,
-    filteredOptions,
-    showOptions,
-    userInput
-  } = autoCompleteOptions;
+  const { filteredOptions, showOptions, userInput } = autoCompleteOptions;
   let optionList;
   if (showOptions && userInput) {
-    if (filteredOptions.length) {
+    if (filteredOptions.length > 0) {
       optionList = (
         <ul className="options">
           {filteredOptions.map((option, index) => {
-            let className;
-            if (index === activeOption) {
-              className = 'option-active';
-            }
             return (
-              <ItemsMemorized
-                className={className}
-                key={index}
-                onClick={onClick}
-                option={option}
-              />
+              <ItemsMemorized key={index} onClick={onClick} option={option} />
             );
           })}
         </ul>
@@ -106,26 +52,21 @@ const AutoComplete = ({ options, onChange, ...rest }) => {
     } else {
       optionList = (
         <div className="no-options">
-          <em>No Option!</em>
+          <em>{'No Option!'}</em>
         </div>
       );
     }
   }
   return (
-    <>
-      <div className="search">
-        <input
-          type="text"
-          className="search-box"
-          {...rest}
-          onChange={onChangeInput}
-          onKeyDown={onKeyDown}
-          value={userInput}
-        />
-        <input type="submit" value="" className="search-btn" />
-      </div>
+    <div className="search">
+      <InputText
+        {...rest}
+        onChange={onChangeInput}
+        value={userInput}
+        placeHolder={placeHolder}
+      ></InputText>
       {optionList}
-    </>
+    </div>
   );
 };
 

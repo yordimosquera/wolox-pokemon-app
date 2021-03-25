@@ -2,10 +2,10 @@ import React from 'react';
 import './styles.scss';
 
 const CheckBox = ({ children, onChange }) => (
-  <label className="checkbox">
+  <div className="checkbox">
     <input type={'checkbox'} onChange={onChange} />
     {children}
-  </label>
+  </div>
 );
 
 export default CheckBox;

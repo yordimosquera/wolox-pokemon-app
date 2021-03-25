@@ -1,0 +1,17 @@
+.main-logo {
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+.image-logo {
+  width: 20em;
+}
+
+@media screen and (max-width: 985px) {
+  .main-logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(10%, 50%);
+  }
+}
