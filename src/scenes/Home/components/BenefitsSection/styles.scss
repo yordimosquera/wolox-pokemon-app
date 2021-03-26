@@ -1,0 +1,43 @@
+@import '../../../../scss-variables.scss';
+
+.benefits {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.benefits-title {
+  font-family: 'Montserrat Regular';
+  font-size: 2.2em;
+  margin-top: 50px;
+  margin-bottom: 60px;
+  text-align: center;
+  span {
+    font-family: 'Montserrat Bold';
+    color: $mainBlue;
+    margin-left: 17px;
+  }
+}
+
+.divider {
+  margin-top: 70px;
+  width: 100%;
+  border-bottom: 1px solid #f2f5fa;
+  box-shadow: 1px 0px 16px 2px #bfc8cc;
+}
+
+.benefits-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  padding: 30px;
+}
+
+@media (max-width: 985px) {
+  .benefits-container {
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}

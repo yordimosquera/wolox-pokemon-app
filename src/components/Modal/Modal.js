@@ -1,6 +1,10 @@
 import React from 'react';
 import './styles.scss';
 
-const Modal = ({ children }) => <div className="modal">{children}</div>;
+const Modal = ({ children }) => (
+  <div className="modal-container">
+    <div className="modal">{children}</div>
+  </div>
+);
 
 export default Modal;

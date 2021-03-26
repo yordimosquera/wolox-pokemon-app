@@ -1,0 +1,20 @@
+.benefit {
+  font-family: 'Montserrat Regular';
+  align-self: baseline;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  font-size: 1.2em;
+  img {
+    margin-bottom: 10px;
+  }
+  align-items: center;
+  text-align: center;
+  padding: 15px;
+}
+
+@media (max-width: 985px) {
+  .benefit {
+    align-self: center;
+  }
+}

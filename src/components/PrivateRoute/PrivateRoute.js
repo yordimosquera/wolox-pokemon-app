@@ -7,18 +7,21 @@ const PrivateRoute = ({
   condition,
   ...rest
 }) => (
-  <Route
-    {...rest}
-    render={props =>
-      condition ? (
-        <Component {...props} />
-      ) : (
-        <Redirect
-          to={{ pathname: secondaryPath, state: { from: props.location } }}
-        />
-      )
-    }
-  />
+  console.log({ ...rest }),
+  (
+    <Route
+      {...rest}
+      render={props =>
+        condition ? (
+          <Component {...props} />
+        ) : (
+          <Redirect
+            to={{ pathname: secondaryPath, state: { from: props.location } }}
+          />
+        )
+      }
+    />
+  )
 );
 
 export default PrivateRoute;

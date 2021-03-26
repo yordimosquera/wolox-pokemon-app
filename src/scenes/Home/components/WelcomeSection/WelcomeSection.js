@@ -3,7 +3,7 @@ import peopleLogo from '../../../../assets/images/Ic_ilustra_Hero@3x.png';
 import './styles.scss';
 
 const WelcomeSection = () => (
-  <div className="welcome-section">
+  <div id="welcome" className="welcome-section">
     <p className="welcome-text">
       <span>{'Bienvenido a tu'}</span>
       <span>

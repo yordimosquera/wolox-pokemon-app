@@ -5,7 +5,7 @@ import techLogo from '../../../../assets/images/Ic_Tecnologys.svg';
 import './styles.scss';
 
 const TechsSection = () => (
-  <div className="tech-section">
+  <div id="technologies" className="tech-section">
     <p className="tech-text">
       <span>{'Estamos buscando'}</span>
       <span>{'para incorporar gente'}</span>

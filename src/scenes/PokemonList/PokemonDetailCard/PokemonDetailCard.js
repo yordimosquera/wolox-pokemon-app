@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '../../../components/Button';
 import './styles.scss';
 
 const PokemonDetailCard = ({
@@ -8,24 +9,36 @@ const PokemonDetailCard = ({
   types,
   weight,
   height,
-  moves
+  moves,
+  onClick,
+  buttonText
 }) => (
   <div className="detail-card">
-    <img src={front_default} className="pokemon-detail-card--image" />
-    <p>{name}</p>
-    <p>{`# ${id}`}</p>
-    <p>{'Types: '}</p>
-    {types.map((item, index) => (
-      <p key={index}>{`- ${item.type.name}`}</p>
-    ))}
-    <p>{`Height: ${height}`}</p>
-    <p>{`weight: ${weight}`}</p>
-    <p>{'Moves: '}</p>
-    {moves
-      .filter((item, index) => index <= 3)
-      .map((item, index) => (
-        <p key={index}>{`- ${item.move.name}`}</p>
+    <div className="img-container">
+      <img src={front_default} className="pokemon-detail-card--image" />
+    </div>
+    <p>
+      {name}
+      <span>{`  #${id}`}</span>
+    </p>
+    <p>{`Types: `}</p>
+    <ul>
+      {types.map((item, index) => (
+        <li key={index}>{item.type.name}</li>
       ))}
+    </ul>
+    <p>{`Height:   ${height} ft`}</p>
+    <p>{`Weight:   ${weight} lbs`}</p>
+    <p>{'Moves: '}</p>
+
+    <ul>
+      {moves.slice(0, 4).map((item, index) => (
+        <li key={index}>{item.move.name}</li>
+      ))}
+    </ul>
+    <Button onClick={onClick} buttonStyle="btn--outline">
+      {buttonText}
+    </Button>
   </div>
 );
 

@@ -179,10 +179,12 @@ const SignUp = ({ history, getCountries, countries, userSignUp }) => {
               checked={props.value}
               onChange={e => props.onChange(e.target.checked)}
             >
-              <p>{'Aceptas los terminos y condiciones'}</p>
-              <Link to={'terms'} target="_blank">
-                {'Terms and conditions'}
-              </Link>
+              <p>
+                {'Aceptas los terminos y condiciones'}{' '}
+                <Link to={'terms'} target="_blank">
+                  {'Terms and conditions'}
+                </Link>
+              </p>
             </CheckBox>
           )}
         />

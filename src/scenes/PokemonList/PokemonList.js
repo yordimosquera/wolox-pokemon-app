@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { BiSearchAlt2 } from 'react-icons/bi';
+import { CgPokemon } from 'react-icons/cg';
 import { Pagination } from 'react-custom-pagination';
+import { FaTimes } from 'react-icons/fa';
 
-import ElementList from '../../components/ElementList/ElementList';
 import Button from '../../components/Button';
 import InputText from '../../components/InputText';
 import ErrorText from '../../components/ErrorText';
 import Modal from '../../components/Modal';
 import PokemonDetailCard from './PokemonDetailCard';
 import CustomSelect from '../../components/CustomSelect';
+import Card from '../../components/Card/Card';
+import pokeball from '../../assets/images/Pokeball.png';
 
 import { ELEMENTS_PER_PAGE_OPTIONS } from '../../constants';
 import './styles.scss';
@@ -94,21 +97,27 @@ const PokemonList = ({ pokemonContext }) => {
     <div className="pokemonlist">
       {isModalVisible && (
         <Modal>
-          <div>
+          <div className="pokemon-detail">
             {pokemonChosedDetails.map((item, index) => (
-              <PokemonDetailCard key={index} {...item} />
+              <PokemonDetailCard
+                key={index}
+                {...item}
+                onClick={() => {
+                  removePokemonChosed(item.name);
+                }}
+                buttonText={'Remove'}
+              />
             ))}
-            <Button
-              buttonStyle={'btn--primary'}
-              type="submit"
-              onClick={() => setIsModalVisible(false)}
-            >
-              {'Regresar'}
-            </Button>
+            <FaTimes
+              className="modal-icon"
+              onClick={() => {
+                setIsModalVisible(false);
+              }}
+            />
           </div>
         </Modal>
       )}
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form className="search-container" onSubmit={handleSubmit(onSubmit)}>
         <Controller
           name={'nameOrId'}
           control={control}
@@ -123,59 +132,61 @@ const PokemonList = ({ pokemonContext }) => {
         <Button buttonStyle={'btn--primary'} type="submit">
           {'Buscar'}
         </Button>
+        <Button
+          buttonStyle={'btn--primary'}
+          type="submit"
+          onClick={() => restoreSearch()}
+        >
+          {'Restablecer'}
+        </Button>
       </form>
-      <Button
-        buttonStyle={'btn--primary'}
-        type="submit"
-        onClick={() => restoreSearch()}
-      >
-        {'Restablecer'}
-      </Button>
-      <h3>{'My team'}</h3>
-      {pokemonChosed.map((item, index) => (
-        <ElementList
-          name={item.name}
-          url={item.url}
-          buttonText={'-'}
-          key={index}
-          onClick={() => removePokemonChosed(item.name)}
-        />
-      ))}
-      <Button
-        buttonStyle={'btn--primary'}
-        type="submit"
-        onClick={() => getPokemonChosedDetails()}
-      >
-        {'Comparar'}
-      </Button>
-      <CustomSelect
-        options={ELEMENTS_PER_PAGE_OPTIONS}
-        handleChange={e => {
-          getElementsPerPage(e.target.value);
+      <div
+        className="pokemon-team"
+        onClick={() => {
+          if (pokemonChosed.length > 0) getPokemonChosedDetails();
         }}
-      />
-      {Array.isArray(pokemonList) && pokemonList.length > 0 ? (
-        pokemonList.map((item, index) => (
-          <ElementList
-            name={item.name}
-            url={item.url}
-            buttonText={'+'}
-            key={index}
-            onClick={() => addPokemonChosed({ url: item.url, name: item.name })}
-          />
-        ))
-      ) : (
-        <p>{'No se encontró ningún pokemon'}</p>
-      )}
-      <div style={{ width: '500px' }}>
-        <Pagination
-          totalPosts={count}
-          postsPerPage={paginationData.elementsPerPage}
-          paginate={paginate}
-          showLast={true}
-          showFirst={true}
-          showIndex={true}
+      >
+        <CgPokemon />
+        <div className="pokemon-choosed">
+          <span>{pokemonChosed.length}</span>
+        </div>
+      </div>
+
+      <div className="pokemon-list-container">
+        {Array.isArray(pokemonList) && pokemonList.length > 0 ? (
+          pokemonList.map((item, index) => (
+            <Card
+              key={index}
+              image={pokeball}
+              text={item.name}
+              buttonText={'Choose'}
+              onClick={() =>
+                addPokemonChosed({ url: item.url, name: item.name })
+              }
+            />
+          ))
+        ) : (
+          <p>{'No se encontró ningún pokemon'}</p>
+        )}
+      </div>
+
+      <div className="pagination-container">
+        <CustomSelect
+          options={ELEMENTS_PER_PAGE_OPTIONS}
+          handleChange={e => {
+            getElementsPerPage(e.target.value);
+          }}
         />
+        <div style={{ width: '500px' }}>
+          <Pagination
+            totalPosts={count}
+            postsPerPage={paginationData.elementsPerPage}
+            paginate={paginate}
+            showLast={true}
+            showFirst={true}
+            showIndex={true}
+          />
+        </div>
       </div>
     </div>
   );
