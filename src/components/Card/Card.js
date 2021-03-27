@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Button from '../Button';
 import './styles.scss';
 
@@ -13,5 +14,12 @@ const Card = ({ image, text, buttonText, onClick }) => (
     </div>
   </div>
 );
+
+Card.propTypes = {
+  image: PropTypes.string,
+  onClick: PropTypes.func,
+  text: PropTypes.string,
+  buttonText: PropTypes.string
+};
 
 export default Card;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './styles.scss';
 
 const CustomSelect = ({ options, handleChange }) => (
@@ -10,5 +11,10 @@ const CustomSelect = ({ options, handleChange }) => (
     ))}
   </select>
 );
+
+CustomSelect.propTypes = {
+  options: PropTypes.array,
+  handleChange: PropTypes.func
+};
 
 export default CustomSelect;

@@ -2,7 +2,9 @@ import {
   FETCHING_POKEMON,
   FETCH_POKEMON_SUCCESS,
   FETCH_POKEMON_FAILED,
-  FETCH_POKEMON_DETAILS_SUCCESS
+  FETCH_POKEMON_DETAILS_SUCCESS,
+  SET_POKEMON_DETAILS_FAILED,
+  SET_POKEMON_DETAILS_SUCCESS
 } from './types';
 
 export default (state, action) => {
@@ -25,6 +27,14 @@ export default (state, action) => {
     [FETCH_POKEMON_DETAILS_SUCCESS]: {
       ...state,
       pokemonChosedDetails: action.payload
+    },
+    [SET_POKEMON_DETAILS_SUCCESS]: {
+      ...state,
+      pokemonChosedDetails: action.payload
+    },
+    [SET_POKEMON_DETAILS_FAILED]: {
+      ...state,
+      error: action.error
     }
   };
   return reducer[action.type] ? reducer[action.type] : state;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Button from '../../../components/Button';
 import './styles.scss';
 
@@ -41,5 +42,17 @@ const PokemonDetailCard = ({
     </Button>
   </div>
 );
+
+PokemonDetailCard.propTypes = {
+  name: PropTypes.string,
+  id: PropTypes.number,
+  sprites: PropTypes.object,
+  types: PropTypes.any,
+  weight: PropTypes.string,
+  height: PropTypes.string,
+  moves: PropTypes.array,
+  onClick: PropTypes.func,
+  buttonText: PropTypes.string
+};
 
 export default PokemonDetailCard;

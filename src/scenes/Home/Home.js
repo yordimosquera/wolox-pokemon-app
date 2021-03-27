@@ -1,5 +1,5 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
 import Footer from './components/Footer/Footer';
 import Navbar from './components/Navbar';
 import RequirementsSeciton from './components/RequirementsSection';
@@ -20,6 +20,10 @@ const Home = ({ history }) => {
       <Footer />
     </>
   );
+};
+
+Home.propTypes = {
+  history: PropTypes.object
 };
 
 export default Home;

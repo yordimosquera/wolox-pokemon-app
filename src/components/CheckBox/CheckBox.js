@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './styles.scss';
 
 const CheckBox = ({ children, onChange }) => (
@@ -7,5 +8,10 @@ const CheckBox = ({ children, onChange }) => (
     {children}
   </div>
 );
+
+CheckBox.propTypes = {
+  children: PropTypes.node,
+  onChange: PropTypes.func
+};
 
 export default CheckBox;

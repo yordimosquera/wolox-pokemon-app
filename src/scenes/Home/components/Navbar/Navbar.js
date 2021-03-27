@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { BiMenu } from 'react-icons/bi';
 import { FaTimes } from 'react-icons/fa';
 import Button from '../../../../components/Button/';
+import MainLogo from '../../../../components/MainLogo';
+import woloxLogo from '../../../../assets/images/logo_full_color.svg';
 import './styles.scss';
 
 const Navbar = ({ history }) => {
@@ -34,7 +36,7 @@ const Navbar = ({ history }) => {
   return (
     <div className="navbar">
       <div className="navbar-container">
-        <p>Wolox</p>
+        <MainLogo route={'/'} logo={woloxLogo} size={'regular-logo'} />
         <ul className={isMenuDisplayed ? 'nav-menu active' : 'nav-menu'}>
           {sections.map((section, index) => (
             <li key={index}>
@@ -64,6 +66,10 @@ const Navbar = ({ history }) => {
       </div>
     </div>
   );
+};
+
+Navbar.propTypes = {
+  history: PropTypes.object
 };
 
 export default Navbar;

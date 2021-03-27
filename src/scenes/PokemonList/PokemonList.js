@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import PropTypes from 'prop-types';
 import { BiSearchAlt2 } from 'react-icons/bi';
 import { CgPokemon } from 'react-icons/cg';
 import { Pagination } from 'react-custom-pagination';
@@ -12,13 +12,24 @@ import Modal from '../../components/Modal';
 import PokemonDetailCard from './PokemonDetailCard';
 import CustomSelect from '../../components/CustomSelect';
 import Card from '../../components/Card/Card';
+import MainLogo from '../../components/MainLogo';
+import woloxLogo from '../../assets/images/logo_full_color.svg';
 import pokeball from '../../assets/images/Pokeball.png';
 
 import { ELEMENTS_PER_PAGE_OPTIONS } from '../../constants';
 import './styles.scss';
 
-const PokemonList = ({ pokemonContext }) => {
+const PokemonList = ({
+  getPokemon = () => {},
+  pokemon = {},
+  getPokemonByIdOrName,
+  error,
+  getPokemonDetails,
+  pokemonChosedDetails,
+  setPokemonTeamChoosed
+}) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [nameOrId, setNameOrId] = useState('');
 
   const [paginationData, setPaginationData] = useState({
     currentPage: 1,
@@ -27,20 +38,15 @@ const PokemonList = ({ pokemonContext }) => {
     limit: 20
   });
   const [pokemonChosed, setPokemonChosed] = useState([]);
-  const { handleSubmit, control } = useForm();
-  const {
-    getPokemon,
-    pokemon,
-    getPokemonByIdOrName,
-    error,
-    status,
-    getPokemonDetails,
-    pokemonChosedDetails
-  } = pokemonContext;
+
   const { results: pokemonList = [], count = 0 } = pokemon;
 
-  const onSubmit = ({ nameOrId }) => {
+  const onSubmit = nameOrId => {
     getPokemonByIdOrName(nameOrId);
+  };
+
+  const onChange = param => {
+    setNameOrId(param);
   };
 
   useEffect(() => {
@@ -58,6 +64,7 @@ const PokemonList = ({ pokemonContext }) => {
       item => item.name !== name
     );
     setPokemonChosed(pokemonChosedFiltered);
+    setPokemonTeamChoosed(name, pokemonChosedDetails);
   };
 
   const getPokemonChosedDetails = () => {
@@ -67,6 +74,7 @@ const PokemonList = ({ pokemonContext }) => {
 
   const restoreSearch = () => {
     getPokemon({ limit: 20, offset: 0 });
+    setNameOrId('');
     setPaginationData({
       currentPage: 1,
       elementsPerPage: 20,
@@ -74,7 +82,6 @@ const PokemonList = ({ pokemonContext }) => {
       limit: 20
     });
   };
-
   const paginate = pageNumber => {
     const { elementsPerPage } = paginationData;
     const newLimit = pageNumber * elementsPerPage;
@@ -92,9 +99,9 @@ const PokemonList = ({ pokemonContext }) => {
     setPaginationData({ ...paginationData, elementsPerPage: value });
     getPokemon({ limit: value, offset: 0 });
   };
-
   return (
     <div className="pokemonlist">
+      <MainLogo route={'/'} logo={woloxLogo} size={'big-logo'} />
       {isModalVisible && (
         <Modal>
           <div className="pokemon-detail">
@@ -117,29 +124,22 @@ const PokemonList = ({ pokemonContext }) => {
           </div>
         </Modal>
       )}
-      <form className="search-container" onSubmit={handleSubmit(onSubmit)}>
-        <Controller
-          name={'nameOrId'}
-          control={control}
-          defaultValue={''}
-          render={props => (
-            <InputText placeHolder={'name or id'} {...props}>
-              <BiSearchAlt2 />
-            </InputText>
-          )}
-        />
-        {error && <ErrorText message={'No pokemon with that name or id'} />}
-        <Button buttonStyle={'btn--primary'} type="submit">
+      <div className="search-container">
+        <InputText
+          value={nameOrId}
+          placeHolder={'name or id'}
+          onChange={e => onChange(e.target.value)}
+        >
+          <BiSearchAlt2 />
+        </InputText>
+
+        <Button buttonStyle={'btn--primary'} onClick={() => onSubmit(nameOrId)}>
           {'Buscar'}
         </Button>
-        <Button
-          buttonStyle={'btn--primary'}
-          type="submit"
-          onClick={() => restoreSearch()}
-        >
+        <Button buttonStyle={'btn--primary'} onClick={() => restoreSearch()}>
           {'Restablecer'}
         </Button>
-      </form>
+      </div>
       <div
         className="pokemon-team"
         onClick={() => {
@@ -153,7 +153,13 @@ const PokemonList = ({ pokemonContext }) => {
       </div>
 
       <div className="pokemon-list-container">
-        {Array.isArray(pokemonList) && pokemonList.length > 0 ? (
+        {error ? (
+          <ErrorText
+            message={'No se encontró ningún pokemon con ese nombre 🙃'}
+          />
+        ) : (
+          Array.isArray(pokemonList) &&
+          pokemonList.length > 0 &&
           pokemonList.map((item, index) => (
             <Card
               key={index}
@@ -165,8 +171,6 @@ const PokemonList = ({ pokemonContext }) => {
               }
             />
           ))
-        ) : (
-          <p>{'No se encontró ningún pokemon'}</p>
         )}
       </div>
 
@@ -177,7 +181,7 @@ const PokemonList = ({ pokemonContext }) => {
             getElementsPerPage(e.target.value);
           }}
         />
-        <div style={{ width: '500px' }}>
+        <div style={{ width: '500px', fontFamily: 'Montserrat Regular' }}>
           <Pagination
             totalPosts={count}
             postsPerPage={paginationData.elementsPerPage}
@@ -185,11 +189,24 @@ const PokemonList = ({ pokemonContext }) => {
             showLast={true}
             showFirst={true}
             showIndex={true}
+            showFirstText={'Show First'}
+            view={3}
+            indexbgColor={'#98cf00'}
           />
         </div>
       </div>
     </div>
   );
+};
+
+PokemonList.propTypes = {
+  getPokemon: PropTypes.func,
+  pokemon: PropTypes.object,
+  getPokemonByIdOrName: PropTypes.func,
+  error: PropTypes.object,
+  getPokemonDetails: PropTypes.func,
+  pokemonChosedDetails: PropTypes.array,
+  setPokemonTeamChoosed: PropTypes.func
 };
 
 export default PokemonList;

@@ -1,6 +1,12 @@
 import React, { useReducer } from 'react';
+import PropTypes from 'prop-types';
 import reducer from './reducer';
-import { fetch, fetchByIdOrName, fethPokemonDetails } from './actions';
+import {
+  fetch,
+  fetchByIdOrName,
+  fethPokemonDetails,
+  setPokemonChoosedDetails
+} from './actions';
 import context from './context';
 
 const PokemonWrapper = ({ children }) => {
@@ -18,6 +24,9 @@ const PokemonWrapper = ({ children }) => {
   const getPokemonDetails = pokemonToFind =>
     fethPokemonDetails({ dispatch, pokemonToFind });
 
+  const setPokemonTeamChoosed = (name, pokemonTeam) =>
+    setPokemonChoosedDetails({ dispatch, name, pokemonTeam });
+
   return (
     <context.Provider
       value={{
@@ -27,12 +36,17 @@ const PokemonWrapper = ({ children }) => {
         getPokemon,
         getPokemonByIdOrName,
         getPokemonDetails,
-        pokemonChosedDetails
+        pokemonChosedDetails,
+        setPokemonTeamChoosed
       }}
     >
       {children}
     </context.Provider>
   );
+};
+
+PokemonWrapper.propTypes = {
+  children: PropTypes.node
 };
 
 export default PokemonWrapper;

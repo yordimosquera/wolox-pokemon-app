@@ -1,6 +1,4 @@
 import React from 'react';
-import woloxLogo from '../../../../assets/images/logo_full_color.svg';
-import woloxerImage from '../../../../assets/images/img_woloxer.png';
 import techLogo from '../../../../assets/images/Ic_Tecnologys.svg';
 import './styles.scss';
 

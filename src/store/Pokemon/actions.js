@@ -3,7 +3,9 @@ import {
   FETCHING_POKEMON,
   FETCH_POKEMON_FAILED,
   FETCH_POKEMON_SUCCESS,
-  FETCH_POKEMON_DETAILS_SUCCESS
+  FETCH_POKEMON_DETAILS_SUCCESS,
+  SET_POKEMON_DETAILS_SUCCESS,
+  SET_POKEMON_DETAILS_FAILED
 } from './types';
 
 export const fetch = async ({ dispatch, offset, limit }) => {
@@ -53,5 +55,19 @@ export const fethPokemonDetails = async ({ dispatch, pokemonToFind }) => {
     });
   } catch (error) {
     dispatch({ type: FETCH_POKEMON_FAILED, error });
+  }
+};
+
+export const setPokemonChoosedDetails = ({ dispatch, name, pokemonTeam }) => {
+  try {
+    const pokemonChoosedFiltered = pokemonTeam.filter(
+      item => item.name !== name
+    );
+    dispatch({
+      type: SET_POKEMON_DETAILS_SUCCESS,
+      payload: pokemonChoosedFiltered
+    });
+  } catch (error) {
+    dispatch({ type: SET_POKEMON_DETAILS_FAILED, error });
   }
 };

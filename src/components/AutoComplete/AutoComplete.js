@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import PropTypes from 'prop-types';
 import InputText from '../InputText';
 import ItemList from '../ItemList';
 import './styles.scss';
@@ -68,6 +69,12 @@ const AutoComplete = ({ options, onChange, placeHolder, ...rest }) => {
       {optionList}
     </div>
   );
+};
+
+AutoComplete.propTypes = {
+  options: PropTypes.array,
+  onChange: PropTypes.func,
+  placeHolder: PropTypes.string
 };
 
 export default AutoComplete;

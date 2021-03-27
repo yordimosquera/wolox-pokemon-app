@@ -1,4 +1,5 @@
 import React, { useReducer } from 'react';
+import PropTypes from 'prop-types';
 import reducer from './reducer';
 import { signUp } from './actions';
 import context from './context';
@@ -15,6 +16,10 @@ const SignUpWrapper = ({ children }) => {
       {children}
     </context.Provider>
   );
+};
+
+SignUpWrapper.propTypes = {
+  children: PropTypes.node
 };
 
 export default SignUpWrapper;

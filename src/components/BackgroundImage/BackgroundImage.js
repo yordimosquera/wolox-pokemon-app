@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './styles.scss';
 
 const BackgroundImage = ({ imageUrl, children }) => (
@@ -9,5 +10,10 @@ const BackgroundImage = ({ imageUrl, children }) => (
     {children}
   </div>
 );
+
+BackgroundImage.propTypes = {
+  imageUrl: PropTypes.string,
+  children: PropTypes.node
+};
 
 export default BackgroundImage;

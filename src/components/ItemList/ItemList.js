@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './styles.scss';
 
 const ItemList = ({ option, key, onClick, className }) => (
@@ -7,5 +8,12 @@ const ItemList = ({ option, key, onClick, className }) => (
     {option.name}
   </li>
 );
+
+ItemList.propTypes = {
+  option: PropTypes.object,
+  key: PropTypes.number,
+  onClick: PropTypes.func,
+  className: PropTypes.string
+};
 
 export default ItemList;

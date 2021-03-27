@@ -1,4 +1,5 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { useForm, Controller } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { BiUser } from 'react-icons/bi';
@@ -32,7 +33,7 @@ const SignUp = ({ history, getCountries, countries, userSignUp }) => {
 
   return (
     <div className="signup">
-      <MainLogo route={'/'} logo={woloxLogo} />
+      <MainLogo route={'/'} logo={woloxLogo} size={'big-logo'} />
       <form className="signup-form" onSubmit={handleSubmit(onSubmit)}>
         <Controller
           name={'name'}
@@ -200,6 +201,15 @@ const SignUp = ({ history, getCountries, countries, userSignUp }) => {
       </form>
     </div>
   );
+};
+
+SignUp.propTypes = {
+  history: PropTypes.object,
+  getCountries: PropTypes.func,
+  countries: PropTypes.array,
+  userSignUp: PropTypes.func,
+  onChange: PropTypes.func,
+  value: PropTypes.bool
 };
 
 export default SignUp;
