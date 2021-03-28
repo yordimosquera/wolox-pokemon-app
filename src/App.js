@@ -1,57 +1,62 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Home from './scenes/Home';
 
-import SignUp from './scenes/SignUp';
 import CountriesWrapper from './store/Countries';
 import PokemonWrapper from './store/Pokemon';
 import SignUpWrapper from './store/SignUp/SignUpWrapper';
 import PrivateRoute from './components/PrivateRoute';
 import TermsAndConditions from './scenes/TermsAndConditions/';
-import PokemonList from './scenes/PokemonList';
+import ErrorFallBack from './components/ErrorFallback';
+import SignUpRoute from './components/SignUpRoute.js';
+
 import './App.scss';
 
-// const PokemonList = lazy(() => import('./scenes/PokemonList'));
+const Home = lazy(() => import('./scenes/Home'));
+const PokemonList = lazy(() => import('./scenes/PokemonList'));
+const SignUp = lazy(() => import('./scenes/SignUp'));
 
 function App() {
-  const token = localStorage.getItem('token');
-
   return (
     <>
       <CountriesWrapper>
         <PokemonWrapper>
           <SignUpWrapper>
-            <Router>
-              <Switch>
-                <Route path="/" exact component={Home} />
-                <PrivateRoute
-                  exact
-                  path="/sign-up"
-                  secondaryPath={'/pokemonlist'}
-                  component={SignUp}
-                  condition={token ? false : true}
-                />
-                <Route exact path="/terms" component={TermsAndConditions} />
-                <Route
-                  path="/twitter"
-                  render={() => (window.location = 'https://twitter.com/Wolox')}
-                />
-                <Route
-                  path="/wolox"
-                  render={() => (window.location = 'https://www.wolox.com.ar/')}
-                />
-                {/* <Suspense fallback={<div>Loading...</div>}> */}
-                {/* <PrivateRoute
-                    exact
-                    path="/pokemonlist"
-                    secondaryPath={'/sign-up'}
-                    component={PokemonList}
-                    condition={token ? true : false}
-                  /> */}
-                <Route path="/pokemonlist" exact component={PokemonList} />
-                {/* </Suspense> */}
-              </Switch>
-            </Router>
+            <ErrorBoundary FallbackComponent={ErrorFallBack}>
+              <Suspense fallback={<div className="loader">Loading...</div>}>
+                <Router>
+                  <Switch>
+                    <Route path="/" exact component={Home} />
+                    <SignUpRoute
+                      exact
+                      path="/sign-up"
+                      secondaryPath={'/pokemonlist'}
+                      component={SignUp}
+                    />
+                    <Route exact path="/terms" component={TermsAndConditions} />
+                    <Route
+                      path="/twitter"
+                      render={() =>
+                        (window.location = 'https://twitter.com/Wolox')
+                      }
+                    />
+                    <Route
+                      path="/wolox"
+                      render={() =>
+                        (window.location = 'https://www.wolox.com.ar/')
+                      }
+                    />
+
+                    <PrivateRoute
+                      exact
+                      path="/pokemonlist"
+                      secondaryPath={'/sign-up'}
+                      component={PokemonList}
+                    />
+                  </Switch>
+                </Router>
+              </Suspense>
+            </ErrorBoundary>
           </SignUpWrapper>
         </PokemonWrapper>
       </CountriesWrapper>

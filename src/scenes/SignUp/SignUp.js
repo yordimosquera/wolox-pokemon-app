@@ -26,8 +26,9 @@ const SignUp = ({ history, getCountries, countries, userSignUp }) => {
   }, []);
 
   const buttonDisabled = Object.keys(errors).length > 0;
-  const onSubmit = data => {
-    userSignUp(data, countries);
+
+  const onSubmit = async data => {
+    await userSignUp(data, countries);
     history.push('/pokemonlist');
   };
 
@@ -181,7 +182,7 @@ const SignUp = ({ history, getCountries, countries, userSignUp }) => {
               onChange={e => props.onChange(e.target.checked)}
             >
               <p>
-                {'Aceptas los terminos y condiciones'}{' '}
+                {'Accept the terms and conditions'}{' '}
                 <Link to={'terms'} target="_blank">
                   {'Terms and conditions'}
                 </Link>
@@ -196,7 +197,7 @@ const SignUp = ({ history, getCountries, countries, userSignUp }) => {
           type="submit"
           disabled={buttonDisabled}
         >
-          {'Registrarse'}
+          {'Sign up'}
         </Button>
       </form>
     </div>

@@ -1,10 +1,9 @@
-import { render, fireEvent, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { assert, spy } from 'sinon';
 import '@testing-library/jest-dom/extend-expect';
 import { createMemoryHistory } from 'history';
 import PokemonList from './PokemonList';
 import { Router } from 'react-router';
-import ErrorText from '../../components/ErrorText';
 
 describe('PokemonList', () => {
   const pokemon = {
@@ -55,16 +54,4 @@ describe('PokemonList', () => {
     const { wrapper, props } = makeWrapper();
     assert.calledWithExactly(props.getPokemon, { limit: 20, offset: 0 });
   });
-
-  //   it('should render error message if there is an error', async () => {
-  //     const { wrapper, props } = makeWrapper({
-  //       ...pokemonContext,
-  //       error: 'synstax error'
-  //     });
-  //     const item = await screen.getByRole(ErrorText);
-  //     console.log(item);
-  //     expect(item).toBe(true);
-  //   });
-
-  //   it('', () => {});
 });

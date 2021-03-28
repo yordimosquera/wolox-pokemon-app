@@ -20,4 +20,10 @@
     left: 0;
     transform: translate(10%, 50%);
   }
+
+  .big-logo {
+    img {
+      width: 10em;
+    }
+  }
 }

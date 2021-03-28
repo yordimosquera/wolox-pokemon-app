@@ -134,10 +134,10 @@ const PokemonList = ({
         </InputText>
 
         <Button buttonStyle={'btn--primary'} onClick={() => onSubmit(nameOrId)}>
-          {'Buscar'}
+          {'Search'}
         </Button>
         <Button buttonStyle={'btn--primary'} onClick={() => restoreSearch()}>
-          {'Restablecer'}
+          {'Restore'}
         </Button>
       </div>
       <div
@@ -201,7 +201,7 @@ const PokemonList = ({
 
 PokemonList.propTypes = {
   getPokemon: PropTypes.func,
-  pokemon: PropTypes.object,
+  pokemon: PropTypes.array,
   getPokemonByIdOrName: PropTypes.func,
   error: PropTypes.object,
   getPokemonDetails: PropTypes.func,

@@ -1,17 +1,14 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
-import SignUpContext from '../../store/SignUp/context';
 
-const PrivateRoute = ({ secondaryPath, component: Component, ...rest }) => {
-  const signUpContext = useContext(SignUpContext);
-  const { token } = signUpContext;
-  const localToken = localStorage.getItem('token');
+const SignUpRoute = ({ secondaryPath, component: Component, ...rest }) => {
+  const token = localStorage.getItem('token');
   return (
     <Route
       {...rest}
       render={props =>
-        localToken || token ? (
+        !token ? (
           <Component {...props} />
         ) : (
           <Redirect
@@ -23,10 +20,10 @@ const PrivateRoute = ({ secondaryPath, component: Component, ...rest }) => {
   );
 };
 
-PrivateRoute.propTypes = {
+SignUpRoute.propTypes = {
   secondaryPath: PropTypes.string,
   component: PropTypes.node,
   location: PropTypes.string
 };
 
-export default PrivateRoute;
+export default SignUpRoute;
