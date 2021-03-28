@@ -1,0 +1,29 @@
+.big-logo {
+  cursor: pointer;
+  margin-bottom: 50px;
+  img {
+    width: 20em;
+  }
+}
+
+.regular-logo {
+  cursor: pointer;
+  img {
+    width: 10em;
+  }
+}
+
+@media screen and (max-width: 985px) {
+  .regular-logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(10%, 50%);
+  }
+
+  .big-logo {
+    img {
+      width: 10em;
+    }
+  }
+}

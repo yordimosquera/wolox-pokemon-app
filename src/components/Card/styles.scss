@@ -1,0 +1,35 @@
+@import '../../scss-variables.scss';
+
+.card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 8px;
+  background-color: $mainWhite;
+  padding: 10px;
+  box-shadow: 0px 4px 14px 0px rgba(50, 50, 50, 0.4);
+  height: 150px;
+  width: 100%;
+}
+
+.card-image {
+  height: 70px;
+  width: 70px;
+  margin-left: 10px;
+}
+
+.card-description {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-family: 'Montserrat Semibold';
+  align-items: center;
+  height: 100%;
+  text-align: center;
+  width: 100%;
+}
+
+.card-text {
+  text-transform: capitalize;
+  font-size: 20px;
+}

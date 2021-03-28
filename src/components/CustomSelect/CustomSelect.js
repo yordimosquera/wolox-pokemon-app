@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './styles.scss';
 
-const CustomSelect = ({ value, options, handleChange }) => (
+const CustomSelect = ({ options, handleChange }) => (
   <select className="custom-select" name="select" onChange={handleChange}>
     {options.map((option, index) => (
       <option key={index} {...option}>
@@ -10,5 +11,10 @@ const CustomSelect = ({ value, options, handleChange }) => (
     ))}
   </select>
 );
+
+CustomSelect.propTypes = {
+  options: PropTypes.array,
+  handleChange: PropTypes.func
+};
 
 export default CustomSelect;

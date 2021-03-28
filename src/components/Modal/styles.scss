@@ -1,15 +1,25 @@
 @import '../../scss-variables.scss';
 
 .modal {
-  position: fixed;
-  z-index: 500;
-  background-color: $mainWhite;
-  width: 70%;
+  width: 80%;
   border: 1px solid $secondaryWhite;
-  box-shadow: 1px 1px 1px black;
-  left: 15%;
-  box-sizing: border-box;
-  transition: all 0.3s ease-out;
-  max-height: 500px;
+  height: 600px;
   overflow-y: auto;
+  background-color: $mainWhite;
+  border-radius: 8px;
+  padding: 30px;
+}
+
+.modal-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 500;
+  background-color: rgba(0, 0, 0, 0.2);
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
 }

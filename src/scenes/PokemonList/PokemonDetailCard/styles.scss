@@ -1,11 +1,53 @@
 @import '../../../scss-variables.scss';
 
 .detail-card {
-  width: 20%;
-  height: 30%;
+  width: 100%;
+  border-right: 2px solid $lightBlue;
+  font-family: 'Montserrat Regular';
+  display: flex;
+  flex-direction: column;
+  &:first-child {
+    border-right: 2px solid $lightBlue;
+  }
+  p:nth-child(2) {
+    font-size: 20px;
+    font-family: 'Montserrat Bold';
+    color: $mainGreen;
+    text-transform: capitalize;
+    span {
+      color: black;
+    }
+  }
+  p:nth-child(3) {
+    margin: 5px 0px 0px 0px;
+  }
+  > ul {
+    margin-left: 15px;
+    margin-top: 3px;
+  }
+  button {
+    margin-top: 10px;
+    align-self: center;
+  }
 }
 
 .pokemon-detail-card--image {
-  width: 50px;
-  height: 50px;
+  width: 150px;
+  height: 150px;
+}
+
+.img-container {
+  background: rgb(44, 167, 223);
+  background: linear-gradient(
+    279deg,
+    rgba(44, 167, 223, 1) 20%,
+    rgba(152, 207, 0, 1) 100%
+  );
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
 }

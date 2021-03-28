@@ -1,0 +1,71 @@
+@import '../../../../scss-variables.scss';
+
+.woloxers-section {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+
+.woloxer-image {
+  align-items: center;
+  justify-content: center;
+  background-image: url(../../../../assets/images/img_woloxer.png);
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  flex: 1.8;
+  padding: 40px;
+}
+
+.blue-text {
+  color: $mainBlue;
+  font-family: 'Montserrat ExtraBold';
+  font-size: 1.2em;
+}
+.green-text {
+  color: $mainGreen;
+  font-family: 'Montserrat ExtraBold';
+  font-size: 1.2em;
+}
+
+.container-twitter {
+  font-family: 'Montserrat Bold';
+  align-items: center;
+  color: $mainWhite;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1em;
+}
+
+.twitter-logo {
+  margin-right: 1em;
+  width: 2em;
+}
+
+.work-for {
+  align-items: center;
+  background: $secondaryWhite;
+  display: flex;
+  flex-direction: column;
+  padding: 4em 5.5em;
+  flex: 1;
+}
+
+.woloxer-text {
+  font-family: 'Montserrat Regular';
+  font-size: 2.2em;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 890px) {
+  .woloxers-section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .woloxer-test {
+    font-size: 1.8em;
+  }
+}

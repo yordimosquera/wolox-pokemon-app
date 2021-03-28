@@ -1,0 +1,50 @@
+{
+    "Common": {
+        "connectors": {
+            "in": "in"
+        },
+        "wolox": "Wolox",
+        "logout": "Logout"
+    },
+    "Home": {
+        "header": {
+            "init": "Home",
+            "technologies": "Technologies",
+            "benefits": "Benefits",
+            "requirements": "Requirements",
+            "welcome_to": "Welcome to your",
+            "interview": "Technical interview"
+        },
+        "body": {
+            "searching": "We are looking",
+            "to_incorporate": "to incorporate amazing",
+            "amazing": "people for these",
+            "techs": "technologies:",
+            "quantity": "350 +",
+            "woloxers": "Woloxers",
+            "twitter": "@wolox",
+            "follow_us": "Follow us",
+            "work_for": "We work to",
+            "convert": "turn",
+            "ideas": "ideas",
+            "products": "products.",
+            "about_benefits": "Among the benefits we offer are",
+            "good_time": "Flexible schedule",
+            "home_office": "Home Office",
+            "workshops": "Training and workshops",
+            "snacks": "Snacks, fruits and free drinks",
+            "remote": "Remote Week",
+            "trend": "Work on latest technologies",
+            "advanced": "Advanced or received students from careers in the field",
+            "career": "computer, systems or electronic.",
+            "english": "Intermediate/Advanced English",
+            "agile": "Knowledge of agile methodologies (desirable)"
+        },
+        "footer": {
+            "thanks": "Thank you for",
+            "complete": "completing the exercise",
+            "invite_you": "we invite you to see more information",
+            "learn_more": "learn more"
+        }
+    }
+}

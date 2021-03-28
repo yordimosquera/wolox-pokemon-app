@@ -1,4 +1,5 @@
 import React, { useReducer } from 'react';
+import PropTypes from 'prop-types';
 import reducer from './reducer';
 import { fetchCountries } from './actions';
 import context from './context';
@@ -14,6 +15,10 @@ const CountriesWrapper = ({ children }) => {
       {children}
     </context.Provider>
   );
+};
+
+CountriesWrapper.propTypes = {
+  children: PropTypes.node
 };
 
 export default CountriesWrapper;

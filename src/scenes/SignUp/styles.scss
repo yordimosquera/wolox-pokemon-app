@@ -1,6 +1,43 @@
-form {
+@import '../../scss-variables.scss';
+
+.signup {
+  background-image: url(../../assets/backgrounds/Bg_Footer@3x.png);
+  background-size: cover;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.signup-form {
+  display: flex;
+  width: 25%;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  border-radius: 8px;
+  border: 1px solid $mainGreen;
+  background-color: $mainWhite;
+  padding: 20px;
+  box-shadow: 0px 4px 14px 0px rgba(50, 50, 50, 0.4);
+  margin-top: 30px;
+}
+
+.form-image {
+  z-index: 1;
+  width: 300px;
+  transform: rotateY(180deg);
+  align-self: flex-start;
+}
+
+.controller-container {
+  margin: 10px 0;
+}
+
+@media (max-width: 890px) {
+  .signup-form {
+    display: contents;
+    background-color: transparent;
+    padding: 30px;
+  }
 }

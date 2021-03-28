@@ -1,0 +1,51 @@
+{
+    "Common": {
+        "connectors": {
+            "in": "en"
+        },
+        "wolox": "Wolox",
+        "logout": "Salir"
+    },
+    "Home": {
+        "header": {
+            "init": "Inicio",
+            "technologies": "Tecnologías",
+            "benefits": "Beneficios",
+            "requirements": "Requerimientos",
+            "welcome_to": "Bienvenido a tu",
+            "interview": "Entrevista Técnica"
+        },
+        "body": {
+            "searching": "Estamos buscando",
+            "to_incorporate": "para incorporar gente",
+            "amazing": "increíble para estas",
+            "techs": "tecnologías:",
+            "quantity": "350 +",
+            "woloxers": "Woloxers",
+            "twitter": "@wolox",
+            "follow_us": "Siguenos",
+            "work_for": "Trabajamos para",
+            "convert": "convertir",
+            "ideas": "ideas",
+            "products": "productos.",
+            "about_benefits": "Entre los beneficios que ofrecemos se encuentran",
+            "good_time": "Flexibilidad Horaria",
+            "home_office": "Trabajar desde casa",
+            "workshops": "Capacitaciones y talleres",
+            "snacks": "Aperitivos, frutas y bebidas gratis",
+            "remote": "Semana Remota",
+            "trend": "Trabajar en ultimas tecnologías",
+            "advanced": "Estudiantes avanzados o recibidos de carreras del rubro",
+            "career": "informático, sistemas o electrónicos.",
+            "english": "Inglés intermedio/avanzado",
+            "agile": "Conocimiento en metodologías ágiles (deseable)"
+        },
+        "footer": {
+            "thanks": "Gracias por",
+            "complete": "completar el ejercicio",
+            "invite_you": "Te invitamos a ver mas información",
+            "learn_more": "conocer más"
+        }
+    }
+
+}

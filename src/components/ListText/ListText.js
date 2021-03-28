@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './styles.scss';
 
 const Requirement = ({ imageSource, text }) => {
@@ -8,6 +9,11 @@ const Requirement = ({ imageSource, text }) => {
       <p>{text}</p>
     </div>
   );
+};
+
+Requirement.propTypes = {
+  imageSource: PropTypes.string,
+  text: PropTypes.string
 };
 
 export default Requirement;

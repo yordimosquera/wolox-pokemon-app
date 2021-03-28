@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { BiMenu } from 'react-icons/bi';
 import { FaTimes } from 'react-icons/fa';
 import Button from '../../../../components/Button/';
+import MainLogo from '../../../../components/MainLogo';
+import woloxLogo from '../../../../assets/images/logo_full_color.svg';
 import './styles.scss';
 
-const Navbar = () => {
+const Navbar = ({ history }) => {
   const sections = [
-    { name: 'Inicio' },
-    { name: 'Tecnologías' },
-    { name: 'Beneficios' },
-    { name: 'Requerimientos' }
+    { name: 'Inicio', to: '#welcome' },
+    { name: 'Tecnologías', to: '#technologies' },
+    { name: 'Beneficios', to: '#benefits' },
+    { name: 'Requerimientos', to: '#requirements' }
   ];
   const [isMenuDisplayed, setIsMenuDispalyed] = useState(false);
   const [isWindowWidthReduced, setIsWindowWidthReduced] = useState(true);
@@ -34,11 +36,11 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <div className="navbar-container">
-        <p>Wolox</p>
+        <MainLogo route={'/'} logo={woloxLogo} size={'regular-logo'} />
         <ul className={isMenuDisplayed ? 'nav-menu active' : 'nav-menu'}>
           {sections.map((section, index) => (
             <li key={index}>
-              <a href="" className="nav-links">
+              <a href={section.to} className="nav-links">
                 {section.name}
               </a>
             </li>
@@ -54,13 +56,20 @@ const Navbar = () => {
             <BiMenu className="nav-menu-icon" onClick={() => handleClick()} />
           )
         ) : (
-          <Link to={'/sign-up'}>
-            <Button buttonStyle="btn--outline">{'Registro'}</Button>
-          </Link>
+          <Button
+            buttonStyle="btn--outline"
+            onClick={() => history.push('/sign-up')}
+          >
+            {'Registro'}
+          </Button>
         )}
       </div>
     </div>
   );
+};
+
+Navbar.propTypes = {
+  history: PropTypes.object
 };
 
 export default Navbar;

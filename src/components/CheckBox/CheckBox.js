@@ -1,11 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './styles.scss';
 
 const CheckBox = ({ children, onChange }) => (
-  <label className="checkbox">
+  <div className="checkbox">
     <input type={'checkbox'} onChange={onChange} />
     {children}
-  </label>
+  </div>
 );
+
+CheckBox.propTypes = {
+  children: PropTypes.node,
+  onChange: PropTypes.func
+};
 
 export default CheckBox;
